@@ -94,7 +94,23 @@ h1 {
 }
 
 
-/* blobs */
+/* SPINNER */
+.loader {
+    border: 16px solid #DEEBF8;
+    border-top: 16px solid #FFFAD1; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin-top: 35vh;
+  }
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+/* BLOBS */
 .blob {
     position: fixed;
     width: 35%;

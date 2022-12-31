@@ -1,5 +1,6 @@
 import Question from "./Question"
 import React from "react"
+import he from 'he'
 
 export default function Quiz(props) {
 
@@ -17,7 +18,8 @@ export default function Quiz(props) {
             .then(res => res.json())
             .then(data => {
                 setQuizData(getQuizItems(data.results))
-                console.log(getQuizItems(data.results))})
+                console.log(getQuizItems(data.results))
+            })
                 
       }, [])
 
@@ -38,6 +40,7 @@ export default function Quiz(props) {
         return questionArr
       }
       
+      const loader =  <div class="loader"></div> 
 
       const questionElements = quizData.map(item => {
         return(
@@ -51,8 +54,9 @@ export default function Quiz(props) {
     
     return (
         <div className="container">
-            {questionElements}
-            <button className="btn quiz-btn">Check answers</button>
+            {quizData.length > 0 ? questionElements : loader}
+            {quizData.length > 0 && <button className="btn quiz-btn">Check answers</button>}
+
         </div>
     )
 }
