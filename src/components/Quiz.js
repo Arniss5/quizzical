@@ -16,9 +16,7 @@ export default function Quiz(props) {
         fetch(`https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple`)
             .then(res => res.json())
             .then(data => {
-                // getQuizItems(data)
-                // setQuizData(getQuizItems(data.results))
-                
+                setQuizData(getQuizItems(data.results))
                 console.log(getQuizItems(data.results))})
                 
       }, [])
@@ -28,25 +26,32 @@ export default function Quiz(props) {
         let questionArr = []
         
         data.forEach(item => {
+            //combine and shuffle answers
             const answers = item.incorrect_answers.concat(item.correct_answer) 
             const shuffledAnswers = answers.sort(() => Math.random() - 0.5)
             questionArr.push({
                 question: item.question,
                 answers: shuffledAnswers,
-                correct_answer: item.correct_answer
+                correctAnswer: item.correct_answer
             })
         })
         return questionArr
       }
       
+
+      const questionElements = quizData.map(item => {
+        return(
+            <Question 
+                question={item.question}
+                answers={item.answers}
+                correctAnswer= {item.correctAnswer}
+            />
+        )
+      })
     
     return (
         <div className="container">
-            <Question />
-            <Question />
-            <Question />
-            <Question />
-            <Question />
+            {questionElements}
             <button className="btn quiz-btn">Check answers</button>
         </div>
     )

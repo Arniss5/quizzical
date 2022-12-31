@@ -56,7 +56,9 @@ h1 {
 /* Quiz */
 .question {
     text-align: left;
-    border-bottom: 1px solid #DBDEF0;;
+    width: 100%;
+    max-width: 700px;
+    border-bottom: 1px solid #DBDEF0;
 }
 
 .question h2 {
@@ -80,6 +82,10 @@ h1 {
     border: .8px solid #4D5B9E;
     border-radius: 8px;
     margin: 0 1em 1em 0;
+}
+
+.answer:hover {
+    cursor: pointer;
 }
 
 .answer.selected {
