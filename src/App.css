@@ -1,38 +1,107 @@
-.App {
-  text-align: center;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #293264;
+    background-color: #F5F7FB;  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5vh 5%;
+    gap: 1rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.new-game {
+    margin-top: 35vh;
 }
 
-.App-link {
-  color: #61dafb;
+h1 {
+    font-family: 'Karla', sans-serif;
+    font-size: 2.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.btn {
+    color: #F5F7FB;
+    background-color: #4D5B9E;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 1em 4em;
+    margin: 1rem;
+    border: none;
+    border-radius: .9em;
+    transition: transform ease .4s;
 }
+
+.quiz-btn {
+    font-size: .8rem;
+}
+
+.btn:hover,
+.btn:active {
+    cursor: pointer;
+    transform: scale(.9);
+    -webkit-transform:scale(1.1);
+    -moz-transform:scale(1.1);
+}
+
+/* Quiz */
+.question {
+    text-align: left;
+    border-bottom: 1px solid #DBDEF0;;
+}
+
+.question h2 {
+    font-family: 'Karla', sans-serif;
+    font-size: 1rem;
+}
+
+.answer-container {
+    margin: .8em 0 0.5em 0;
+}
+
+.answer {
+    color: inherit;
+    font-family: inherit;
+    font-size: .64rem;
+    font-weight: 500;
+    background-color: transparent;
+    line-height: 1.3rem;
+    padding: 0 .5rem;
+    min-width: 4.125rem;
+    border: .8px solid #4D5B9E;
+    border-radius: 8px;
+    margin: 0 1em 1em 0;
+}
+
+.answer.selected {
+    background-color: #D6DBF5;
+    border: none;
+}
+
+
+/* blobs */
+.blob {
+    position: fixed;
+    width: 35%;
+    z-index: -1;
+}
+
+.blob1 {
+    top: 0;
+    right: 0;
+}
+
+.blob2 {
+    bottom: 0%;
+    left: 0;
+}
+
