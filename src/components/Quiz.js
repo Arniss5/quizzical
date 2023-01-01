@@ -8,47 +8,27 @@ export default function Quiz(props) {
     const [quizData, setQuizData] = React.useState([])
     const [gameComplete, setGameComplete] = React.useState(false)
 
-    console.log(gameComplete)
     
     // useRef() keeps track of a boolean
     const dataFetchedRef = React.useRef(false);
+    const [clicks, setClicks] = React.useState(0);
 
-    // React.useEffect(() => {
-    //     //Stop effect from running twice
-    //     if (dataFetchedRef.current) return;
-    //     dataFetchedRef.current = true;
         
-    //     fetch(`https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setQuizData(getQuizItems(data.results))
-    //         })
-                
-    //   }, [])
-
-
-        const [clicks, setClicks] = React.useState(0);
-      
-        React.useEffect(() => {
-            //Stop effect from running twice
-            if (dataFetchedRef.current) return;
-            dataFetchedRef.current = true;
-            fetch(`https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple`)
-                .then(res => res.json())
-                .then(data => {
+    // Get new set of questions 
+    React.useEffect(() => {
+         //Stop effect from running twice
+        if (dataFetchedRef.current) return;
+        dataFetchedRef.current = true;
+        fetch(`https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple`)
+            .then(res => res.json())
+            .then(data => {
                     setQuizData(getQuizItems(data.results))
-                })
-                    
-          }, [clicks])
+            })       
+    }, [clicks])
         
-          
     
-
-
-
-      console.log(quizData)
-      
-      function getQuizItems(data) {
+    // Format fetched data
+    function getQuizItems(data) {
         let questionArr = []
 
         data.forEach(item => {
@@ -66,7 +46,8 @@ export default function Quiz(props) {
         return questionArr
       }
 
-      function selectAnswer(event) {
+
+    function selectAnswer(event) {
         setQuizData(prevState => {
             let newState = []
             for (let item of prevState) {
@@ -81,12 +62,10 @@ export default function Quiz(props) {
             }
             return newState
         })
-      }
+    }
       
 
-
-
-      function getScore() {
+    function getScore() {
         let score = 0
         for (let item of quizData) {
             if(item.correctAnswer === item.selected) {
@@ -94,25 +73,26 @@ export default function Quiz(props) {
             }
         }
         return score
-      }
+    }
 
-      function checkAnswers() {
+
+    function checkAnswers() {
         setGameComplete(true)
-        console.log(getScore())
-      }
+    }
 
-      function startNewGame() {
+
+    function startNewGame() {
         setQuizData([])
         dataFetchedRef.current = false
         setGameComplete(false)
         setClicks(clicks + 1)
-      }
+    }
 
 
     // RENDERED ELEMENTS
-      const loader =  <div class="loader"></div> 
+    const loader =  <div class="loader"></div> 
 
-      const questionElements = quizData.map(item => {
+    const questionElements = quizData.map(item => {
         return(
             <Question 
                 key = {nanoid()}
@@ -121,9 +101,10 @@ export default function Quiz(props) {
                 {...item}
             />
         )
-      })
+    })
     
     let bottomSection
+    // display score and Play again button
     if(quizData.length > 0 && gameComplete) {
         bottomSection = (
             <div className="score-display">
@@ -134,10 +115,11 @@ export default function Quiz(props) {
                     >Play again</button>
             </div>
         )
+    // display Check answers button
     } else if (quizData.length > 0) {
         bottomSection = (
             <button className="btn quiz-btn" onClick={checkAnswers}>Check answers</button>
-            )
+        )
     }
 
     return (

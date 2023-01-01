@@ -13,8 +13,12 @@ export default function Question(props) {
             } else {
                 colorStyling = "incorrect"
             }
+        } else if (props.gameComplete && answer !== props.selected && answer === props.correctAnswer) {
+            colorStyling = "correct"
         } else if (props.gameComplete) {
             colorStyling = "not-selected"
+        } else if (!props.gameComplete && answer === props.selected) {
+            colorStyling = "selected"
         }
 
         return (<button 
