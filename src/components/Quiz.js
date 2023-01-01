@@ -19,7 +19,7 @@ export default function Quiz(props) {
          //Stop effect from running twice
         if (dataFetchedRef.current) return;
         dataFetchedRef.current = true;
-        fetch(`https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple`)
+        fetch(`https://opentdb.com/api.php?amount=${props.formData.number}&category=${props.formData.category}&difficulty=${props.formData.difficulty}&type=multiple`)
             .then(res => res.json())
             .then(data => {
                     setQuizData(getQuizItems(data.results))
@@ -82,6 +82,7 @@ export default function Quiz(props) {
 
 
     function startNewGame() {
+        props.setNewGame(true)
         setQuizData([])
         dataFetchedRef.current = false
         setGameComplete(false)

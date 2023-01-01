@@ -13,6 +13,15 @@ function App() {
 
   const [newGame, setNewGame] = React.useState(true)
   
+  const [formData, setFormData] = React.useState(
+    {
+        number: "5", 
+        difficulty: "",
+        category: "9"
+    }
+  )
+
+  console.log(formData)
 
   function startQuiz() {
     setNewGame(prevState => !prevState)
@@ -22,9 +31,10 @@ function App() {
     <div className="App">
       <img src={blob1} alt="#" className='blob blob1'></img>
       <img src={blob2} alt="#" className='blob blob2'></img>
-      {newGame ? <NewGame startQuiz={startQuiz} /> : <Quiz/>}
+      {newGame ? 
+        <NewGame startQuiz={startQuiz} formData={formData} setFormData={setFormData}/> : 
+        <Quiz setNewGame={setNewGame} formData={formData}/>}
    
-      
     </div>
   );
 }

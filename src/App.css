@@ -20,7 +20,41 @@ body {
 }
 
 .new-game {
-    margin-top: 35vh;
+    margin-top: 20vh;
+}
+
+#number{
+    font-size: .9rem;
+    width: 2.5rem;
+    background-color: #FFFAD1;
+    padding: .3em;
+    border: none;
+}
+
+fieldset {
+    background-color: #FFFAD1;
+    padding: .2em;
+    border: none;
+}
+
+#category {
+    font-size: .9rem;
+    width: 100%;
+    border: none;
+    padding: .2em;
+    border-bottom: 1px solid #A1A9CC;
+    border-right: 1px solid #A1A9CC;
+    background-color: #FFFAD1;
+    margin-top: .2em;
+    
+}
+
+.quiz-form {
+    font-size: .9rem;
+    margin-top: 1em;
+    padding: 2em;
+    border-radius: 0 15px;
+    border: 10px solid #DEEBF8;
 }
 
 h1 {
