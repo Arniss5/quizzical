@@ -1,10 +1,14 @@
 import Question from "./Question"
 import React from "react"
-import he from 'he'
+import {nanoid} from "nanoid"
+
 
 export default function Quiz(props) {
 
     const [quizData, setQuizData] = React.useState([])
+    const [gameComplete, setGameComplete] = React.useState(false)
+
+    console.log(gameComplete)
     
     // useRef() keeps track of a boolean
     const dataFetchedRef = React.useRef(false);
@@ -18,36 +22,72 @@ export default function Quiz(props) {
             .then(res => res.json())
             .then(data => {
                 setQuizData(getQuizItems(data.results))
-                console.log(getQuizItems(data.results))
             })
                 
       }, [])
-
+      console.log(quizData)
       
       function getQuizItems(data) {
         let questionArr = []
-        
+
         data.forEach(item => {
             //combine and shuffle answers
             const answers = item.incorrect_answers.concat(item.correct_answer) 
             const shuffledAnswers = answers.sort(() => Math.random() - 0.5)
             questionArr.push({
+                elId: nanoid(),
                 question: item.question,
                 answers: shuffledAnswers,
-                correctAnswer: item.correct_answer
+                correctAnswer: item.correct_answer,
+                selected: "",
             })
         })
         return questionArr
       }
+
+      function selectAnswer(event) {
+        setQuizData(prevState => {
+            let newState = []
+            for (let item of prevState) {
+                if(event.target.dataset.id === item.elId){
+                    newState.push({
+                        ...item,
+                        selected: event.target.value
+                    })
+                } else {
+                    newState.push(item)
+                }
+            }
+            return newState
+        })
+      }
       
+      function getScore() {
+        let score = 0
+        for (let item of quizData) {
+            if(item.correctAnswer === item.selected) {
+                score++
+            }
+        }
+        return score
+      }
+
+      function checkAnswers() {
+        setGameComplete(true)
+        console.log(getScore())
+      }
+
+
+    // RENDERED ELEMENTS
       const loader =  <div class="loader"></div> 
 
       const questionElements = quizData.map(item => {
         return(
             <Question 
-                question={item.question}
-                answers={item.answers}
-                correctAnswer= {item.correctAnswer}
+                key = {nanoid()}
+                gameComplete = {gameComplete}
+                selectAnswer = {selectAnswer}
+                {...item}
             />
         )
       })
@@ -55,7 +95,7 @@ export default function Quiz(props) {
     return (
         <div className="container">
             {quizData.length > 0 ? questionElements : loader}
-            {quizData.length > 0 && <button className="btn quiz-btn">Check answers</button>}
+            {quizData.length > 0 && <button className="btn quiz-btn" onClick={checkAnswers}>Check answers</button>}
 
         </div>
     )

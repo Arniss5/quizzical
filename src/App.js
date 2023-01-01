@@ -12,7 +12,6 @@ function App() {
 
   const [newGame, setNewGame] = React.useState(true)
   
-
   function startQuiz() {
     setNewGame(prevState => !prevState)
   }

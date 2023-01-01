@@ -93,6 +93,20 @@ h1 {
     border: none;
 }
 
+.correct {
+    background-color: #94D7A2;
+    border: none;
+}
+.incorrect {
+    color: #8F94AF;
+    background-color: #F8BCBC;
+    border: none;
+}
+
+.not-selected {
+    color: #8F94AF;
+    border-color: #A1A9CC;    
+}
 
 /* SPINNER */
 .loader {
