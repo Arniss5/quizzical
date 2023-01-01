@@ -10,8 +10,10 @@ import blob2 from './img/blob2.svg'
 
 function App() {
 
+
   const [newGame, setNewGame] = React.useState(true)
   
+
   function startQuiz() {
     setNewGame(prevState => !prevState)
   }

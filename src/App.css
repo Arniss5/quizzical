@@ -97,6 +97,7 @@ h1 {
     background-color: #94D7A2;
     border: none;
 }
+
 .incorrect {
     color: #8F94AF;
     background-color: #F8BCBC;
@@ -107,6 +108,12 @@ h1 {
     color: #8F94AF;
     border-color: #A1A9CC;    
 }
+
+/* SCORE */
+.score-display {
+    text-align: center;
+}
+
 
 /* SPINNER */
 .loader {

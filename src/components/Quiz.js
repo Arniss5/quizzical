@@ -13,18 +13,39 @@ export default function Quiz(props) {
     // useRef() keeps track of a boolean
     const dataFetchedRef = React.useRef(false);
 
-    React.useEffect(() => {
-        //Stop effect from running twice
-        if (dataFetchedRef.current) return;
-        dataFetchedRef.current = true;
+    // React.useEffect(() => {
+    //     //Stop effect from running twice
+    //     if (dataFetchedRef.current) return;
+    //     dataFetchedRef.current = true;
         
-        fetch(`https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple`)
-            .then(res => res.json())
-            .then(data => {
-                setQuizData(getQuizItems(data.results))
-            })
+    //     fetch(`https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setQuizData(getQuizItems(data.results))
+    //         })
                 
-      }, [])
+    //   }, [])
+
+
+        const [clicks, setClicks] = React.useState(0);
+      
+        React.useEffect(() => {
+            //Stop effect from running twice
+            if (dataFetchedRef.current) return;
+            dataFetchedRef.current = true;
+            fetch(`https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple`)
+                .then(res => res.json())
+                .then(data => {
+                    setQuizData(getQuizItems(data.results))
+                })
+                    
+          }, [clicks])
+        
+          
+    
+
+
+
       console.log(quizData)
       
       function getQuizItems(data) {
@@ -62,6 +83,9 @@ export default function Quiz(props) {
         })
       }
       
+
+
+
       function getScore() {
         let score = 0
         for (let item of quizData) {
@@ -75,6 +99,13 @@ export default function Quiz(props) {
       function checkAnswers() {
         setGameComplete(true)
         console.log(getScore())
+      }
+
+      function startNewGame() {
+        setQuizData([])
+        dataFetchedRef.current = false
+        setGameComplete(false)
+        setClicks(clicks + 1)
       }
 
 
@@ -92,11 +123,27 @@ export default function Quiz(props) {
         )
       })
     
+    let bottomSection
+    if(quizData.length > 0 && gameComplete) {
+        bottomSection = (
+            <div className="score-display">
+                <span>You scored {getScore()}/{quizData.length} correct answers</span>
+                <button 
+                    className="btn quiz-btn"
+                    onClick={startNewGame}
+                    >Play again</button>
+            </div>
+        )
+    } else if (quizData.length > 0) {
+        bottomSection = (
+            <button className="btn quiz-btn" onClick={checkAnswers}>Check answers</button>
+            )
+    }
+
     return (
         <div className="container">
             {quizData.length > 0 ? questionElements : loader}
-            {quizData.length > 0 && <button className="btn quiz-btn" onClick={checkAnswers}>Check answers</button>}
-
+            {bottomSection}
         </div>
     )
 }
