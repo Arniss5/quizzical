@@ -23,6 +23,7 @@ body {
 /* SELECT NEW GAME PAGE */
 
 .quiz-form {
+    background-color: #F5F7FB;
     font-size: 1rem;
     margin-top: 1em;
     padding: 2em;
@@ -156,7 +157,6 @@ h1 {
     width: 120px;
     height: 120px;
     animation: spin 2s linear infinite;
-    /* margin-top: 35vh; */
   }
   
 @keyframes spin {
