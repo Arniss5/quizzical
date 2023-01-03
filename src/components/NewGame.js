@@ -7,7 +7,10 @@ export default function NewGame(props) {
         <div className="container new-game">
             <h1>Quizzical</h1>
             <p className="subtitle">Test your general knowledge!</p>
-            <Form setFormData={props.setFormData}  formData={props.formData}/>
+            <Form 
+                setFormData={props.setFormData}  
+                formData={props.formData}
+            />
             <button className="btn" onClick={props.startQuiz}>Start quiz</button>
         </div>
     )

@@ -20,7 +20,6 @@ export default function Form(props) {
             <input
                 id="number"
                 type="number"
-                placeholder="number"
                 min="1"
                 onChange={handleChange}
                 name="number"

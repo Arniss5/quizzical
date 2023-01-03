@@ -10,9 +10,7 @@ import blob2 from './img/blob2.svg'
 
 function App() {
 
-
-  const [newGame, setNewGame] = React.useState(true)
-  
+  const [newGame, setNewGame] = React.useState(true)  
   const [formData, setFormData] = React.useState(
     {
         number: "5", 
