@@ -15,7 +15,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 95vh;
     padding: 5vh 5%;
     gap: 1rem;
 }
