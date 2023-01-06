@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Moviography
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A quiz app that allows user to select category, level of difficulty and number of questions.
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+- [Overview](#overview)
+  - [Features](#features)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Overview
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Features
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Qustions are pulled from API
+- User can select answers
+- App highlights incorrect answers
+- App displays a final score
+- Fully responsive design
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Screenshot
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![](./src/img/preview1.jpg)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Links
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Code: [Github](https://github.com/Arniss5/quizzical)
+- Live Site URL: [Github Pages](https://arniss5.github.io/quizzical/)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## My process
 
-## Learn More
+### Built with
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- HTML5
+- CSS
+- React
+- API
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### What I learned
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project allowed me to practice many aspect of React: creating JSX and custom components, using props, event listeners, mapping data, handling state and side effects, conditional rendering and designing forms. It was also a good exercise on pulling data from API and creating responsive design with CSS. 
 
-### Analyzing the Bundle Size
+```js
+const [quizData, setQuizData] = React.useState([])
+    const [gameComplete, setGameComplete] = React.useState(false)
+```
+```js
+React.useEffect(() => {
+         //Stop effect from running twice
+        if (dataFetchedRef.current) return;
+        dataFetchedRef.current = true;
+        fetch(`https://opentdb.com/api.php?amount=${props.formData.number}&category=${props.formData.category}&difficulty=${props.formData.difficulty}&type=multiple`)
+            .then(res => res.json())
+            .then(data => {
+                    setQuizData(getQuizItems(data.results))
+            })       
+    }, [clicks])
+```
+```js
+ return (<button 
+             key={nanoid()}
+             data-id={props.elId}
+             className={["answer", colorStyling].join(" ")}
+             onClick={event => props.selectAnswer(event)}
+             value={answer}
+         >
+             {he.decode(answer)}
+        </button>)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Continued development
 
-### Advanced Configuration
+I'm learning more advanced react concepts such as: class components, re-usability (higher order components, render props), performance, hooks and React Router.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Author
 
-### Deployment
+- Github - [Arniss5](https://github.com/Arniss5)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+## Acknowledgments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Quiz API](https://opentdb.com//)
