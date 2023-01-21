@@ -1,4 +1,4 @@
-# Moviography
+# Quizzical
 
 A quiz app that allows user to select category, level of difficulty and number of questions.
 
